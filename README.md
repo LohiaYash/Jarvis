@@ -192,6 +192,17 @@ This is a live project and not a finished product yet.
 
 ---
 
+## 🧭 Roadmap
+
+- [ ] Complete AI agent reasoning engine
+- [ ] Implement tool execution framework
+- [ ] WhatsApp automation integration
+- [ ] Persistent memory system (DB/Redis)
+- [ ] Voice interaction module
+- [ ] Deploy backend services
+
+---
+
 ## 🤝 Contributing
 
 Contributions, suggestions, and improvements are welcome.
