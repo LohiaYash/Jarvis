@@ -1,116 +1,205 @@
-# JARVIS AI OS (Ongoing)
+# 🤖 Jarvis
 
-JARVIS is a local-first personal AI operating system assistant. It is built as a modular monorepo so the brain, memory, tools, agents, dashboard, and desktop shell can evolve independently.
+An AI-powered productivity assistant designed to automate workflows, manage tasks, and integrate with external services through natural language interactions.
 
-## What Is Included
+![Status](https://img.shields.io/badge/Status-Active-success)
+![Node.js](https://img.shields.io/badge/Node.js-Backend-green)
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-- Next.js, React, TypeScript, TailwindCSS, and Framer Motion dashboard
-- Electron desktop wrapper
-- Express TypeScript API
-- Brain module with planning, tool selection, specialist agent routing, memory injection, and approval gating
-- Short-term, long-term, and semantic memory
-- PostgreSQL, Redis, and ChromaDB services
-- Multi-model routing across OpenAI, Claude, Gemini, and Ollama fallback
-- Tool registry with MCP-style manifest
-- File, browser, search, terminal, calendar, email, desktop, and video tools
-- Scheduler for recurring assistant jobs
-- Voice engine hooks for wake-word transcript handling and interruptible TTS events
-- Security layer with encrypted memory, audit logs, JWT auth, and high-risk approval requirements
+---
 
-## Run Locally
+## 📌 Overview
 
-1. Install dependencies:
+Jarvis is a modular AI assistant built to streamline everyday workflows by combining conversational AI with automation capabilities. It acts as a centralized system that can interact with multiple tools, execute actions, manage information, and assist users through natural language commands.
+
+The project focuses on scalability, modular architecture, and seamless integration with external services.
+
+---
+
+## 🚀 Key Features
+
+- 💬 AI-powered conversational interface
+- ⚡ Task and workflow automation
+- 🔗 Integration-ready architecture
+- 📂 Context and memory management
+- 🐳 Dockerized deployment
+- 🔒 Environment-based configuration
+- 📡 API-driven communication
+- 🏗️ Modular and scalable codebase
+
+---
+
+## 🏗️ System Architecture
+
+```text
+┌───────────────────────┐
+│       Frontend        │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│      Backend API      │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│      AI Engine        │
+└──────────┬────────────┘
+           │
+           ▼
+┌───────────────────────┐
+│    Tool Integrations  │
+├───────────────────────┤
+│ Automation Services   │
+│ External APIs         │
+│ Database Layer        │
+│ Workflow Handlers     │
+└───────────────────────┘
+```
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+- Node.js
+- Express.js
+- TypeScript
+
+### AI & Automation
+- Large Language Models (LLMs)
+- Agent-Based Architecture
+- Workflow Automation
+
+### Infrastructure
+- Docker
+- Docker Compose
+
+### Development Tools
+- Git
+- GitHub
+- Postman
+
+---
+
+## 📁 Project Structure
+
+```text
+Jarvis/
+│
+├── apps/
+├── docs/
+├── configs/
+├── services/
+├── Dockerfile
+├── docker-compose.yml
+├── README.md
+├── .env.example
+└── PROJECT_STATUS.md
+```
+
+---
+
+## ⚙️ Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/LohiaYash/Jarvis.git
+cd Jarvis
+```
+
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-2. Create your environment:
+### Configure Environment Variables
 
 ```bash
 cp .env.example .env
 ```
 
-3. Start infrastructure:
+Update the required environment variables.
 
-```bash
-docker compose up postgres redis chroma
-```
-
-4. Start API and dashboard:
+### Run Development Server
 
 ```bash
 npm run dev
 ```
 
-5. Open the dashboard:
+---
 
-```text
-http://localhost:3000
-```
+## 🐳 Running with Docker
 
-The API runs at `http://localhost:4010/api`.
-
-## Desktop App
-
-Start the web app first, then run:
+Build and start services:
 
 ```bash
-npm run dev:desktop
+docker-compose up --build
 ```
 
-## Production Compose
+Run in detached mode:
 
 ```bash
-docker compose up --build
+docker-compose up -d
 ```
 
-## Architecture
+Stop services:
 
-```mermaid
-flowchart LR
-  User[User: voice or text] --> Web[Next Dashboard]
-  Web --> API[Express API]
-  Desktop[Electron Shell] --> Web
-  API --> Brain[Brain Planner]
-  Brain --> Memory[Memory System]
-  Memory --> Postgres[(PostgreSQL)]
-  Memory --> Chroma[(ChromaDB)]
-  Brain --> Router[Model Manager]
-  Router --> OpenAI[OpenAI]
-  Router --> Claude[Claude]
-  Router --> Gemini[Gemini]
-  Router --> Ollama[Ollama]
-  Brain --> Agents[Specialized Agents]
-  Agents --> Tools[Tool Registry]
-  Tools --> FS[Files]
-  Tools --> Browser[Browser Automation]
-  Tools --> DesktopOS[Desktop Control]
-  Tools --> Calendar[Calendar]
-  Tools --> Email[Email]
-  Tools --> Video[FFmpeg Video Jobs]
-  API --> Scheduler[Recurring Jobs]
-  Scheduler --> Brain
+```bash
+docker-compose down
 ```
 
-## Safety Model
+---
 
-Low-risk actions can execute directly. High-risk and critical actions, such as desktop control, file writes, terminal commands, media processing, and destructive operations, are converted into pending tool calls that require explicit approval before execution.
+## 🎯 Goals
 
-## Module Map
+- Build a scalable AI assistant platform
+- Automate repetitive workflows
+- Enable seamless integration with external tools
+- Create a modular architecture for future expansion
+- Improve productivity through intelligent automation
 
-- `apps/api/src/brain`: planning, reasoning orchestration, agent selection
-- `apps/api/src/agents`: productivity, research, coding, content, video, personal assistant, computer control agents
-- `apps/api/src/memory`: short-term, encrypted long-term, semantic Chroma memory
-- `apps/api/src/models`: multi-provider model routing
-- `apps/api/src/tools`: discoverable tool registry and implementations
-- `apps/api/src/security`: permission classification and encryption
-- `apps/api/src/scheduler`: recurring background jobs
-- `apps/api/src/voice`: wake-word transcript pipeline and TTS events
-- `apps/web`: operational dashboard
-- `apps/desktop`: Electron wrapper
-- `packages/contracts`: shared Zod schemas and TypeScript contracts
+---
 
-## Current Integration Notes
+## 📈 Future Enhancements
 
-Email and calendar tools are implemented as provider-ready boundaries. They return connection status until OAuth credentials and provider scopes are added. Desktop and terminal tools are real but approval-gated. The video tool validates FFmpeg availability and prepares media jobs; full clip scoring can be expanded behind `video.prepare_reels`.
+- Multi-agent collaboration
+- Voice interaction support
+- Advanced memory management
+- Calendar and email integrations
+- Mobile application support
+- Real-time notifications
+- Custom plugin ecosystem
+
+---
+
+## 🤝 Contributing
+
+Contributions, suggestions, and improvements are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a pull request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👨‍💻 Author
+
+**Yash Lohia**
+
+- GitHub: https://github.com/LohiaYash
+- LinkedIn: https://www.linkedin.com/in/yashlohia03/
+
+---
+
+⭐ If you find this project interesting, consider giving it a star.
