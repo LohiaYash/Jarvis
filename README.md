@@ -176,6 +176,22 @@ docker-compose down
 
 ---
 
+## 🚧 Project Status
+
+Jarvis is currently under active development.
+
+Core architecture and base modules are implemented, and the system is being expanded with additional AI tools, automation workflows, and integrations.
+
+Current focus:
+- AI agent orchestration layer
+- Tool execution system
+- WhatsApp automation module
+- Memory + context system
+
+This is a live project and not a finished product yet.
+
+---
+
 ## 🤝 Contributing
 
 Contributions, suggestions, and improvements are welcome.
