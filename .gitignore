@@ -1,0 +1,13 @@
+node_modules
+dist
+.next
+out
+.env
+.env.local
+.DS_Store
+coverage
+*.log
+storage/chroma
+storage/postgres
+storage/redis
+storage/uploads

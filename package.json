@@ -1,0 +1,28 @@
+{
+  "name": "jarvis-ai-os",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A modular personal AI operating system assistant inspired by JARVIS.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w @jarvis/api\" \"npm run dev -w @jarvis/web\"",
+    "dev:desktop": "concurrently \"npm run dev -w @jarvis/web\" \"npm run dev -w @jarvis/desktop\"",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "format": "prettier --write ."
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "npm": ">=10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "concurrently": "^9.1.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
+  }
+}

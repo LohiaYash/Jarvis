@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: jarvis
+      POSTGRES_USER: jarvis
+      POSTGRES_PASSWORD: jarvis
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./storage/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jarvis -d jarvis"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./storage/redis:/data
+
+  chroma:
+    image: chromadb/chroma:0.5.23
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./storage/chroma:/chroma/chroma
+
+  api:
+    build:
+      context: .
+      target: api
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      chroma:
+        condition: service_started
+    ports:
+      - "4010:4010"
+    volumes:
+      - ${JARVIS_SAFE_WORKSPACE:-/tmp}:/safe-workspace
+    environment:
+      JARVIS_SAFE_WORKSPACE: /safe-workspace
+
+  web:
+    build:
+      context: .
+      target: web
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4010/api
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
