@@ -1,4 +1,4 @@
-# JARVIS AI OS
+# JARVIS AI OS (Ongoing)
 
 JARVIS is a local-first personal AI operating system assistant. It is built as a modular monorepo so the brain, memory, tools, agents, dashboard, and desktop shell can evolve independently.
 
